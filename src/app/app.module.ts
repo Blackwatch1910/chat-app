@@ -8,6 +8,11 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ChatModule } from './chat/chat.module';
+import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './user/login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,16 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     CommonModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added
+    ChatModule,
+    UserModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'login', component: LoginComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '*', component: LoginComponent },
+      { path: '**', component: LoginComponent }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
